@@ -58,6 +58,20 @@ class Sa2VAModel(BaseModel):
         if not frozen_sam2_decoder:
             self.grounding_encoder.sam2_model.sam_mask_decoder.requires_grad_(True)
 
+        self.mllm.manual_prepare_llm_for_lora()
+
+        # FIX: Untie weights for Qwen model
+        if self.arch_type == 'qwen' and self.mllm.model.config.tie_word_embeddings and pretrained_pth is not None:
+            print("Untying embed_tokens and lm_head weights for Qwen model.")
+            self.mllm.model.config.tie_word_embeddings = False
+            lm_head = self.mllm.model.get_output_embeddings()
+            if lm_head is not None:
+                input_embeddings = self.mllm.model.get_input_embeddings()
+                lm_head.weight = nn.Parameter(input_embeddings.weight.clone())
+
+        self.mllm.use_llm_lora = True
+        self.mllm.use_visual_encoder_lora = False
+
         in_dim = self.mllm.get_embedding_size()
         out_dim = self.grounding_encoder.hidden_dim
         self.text_hidden_fcs = nn.Sequential(
@@ -74,6 +88,17 @@ class Sa2VAModel(BaseModel):
             self.load_state_dict(pretrained_state_dict, strict=False)
             print(f'Load pretrained weight from {pretrained_pth}')
 
+            # FIX: Force update lm_head weight after loading state_dict
+            if self.arch_type == 'qwen':
+                print("Force updating lm_head weight from pretrained state_dict.")
+                lm_head_key = 'mllm.model.lm_head.weight'
+                if lm_head_key in pretrained_state_dict:
+                    lm_head_weight = pretrained_state_dict[lm_head_key]
+                    self.mllm.model.get_output_embeddings().weight.data.copy_(lm_head_weight)
+                    print(f"Successfully updated lm_head weight from key: {lm_head_key}")
+                else:
+                    print(f"Warning: lm_head weight key '{lm_head_key}' not found in pretrained_state_dict.")
+
         self.loss_sample_points = loss_sample_points
         self.num_points = num_points
         self.oversample_ratio = 3.0
@@ -81,43 +106,6 @@ class Sa2VAModel(BaseModel):
 
         self.template = template
         self.bs = training_bs
-
-        self.mllm.manual_prepare_llm_for_lora()
-        self.mllm.use_llm_lora = True
-        self.mllm.use_visual_encoder_lora = False
-
-        # Print gradient status of all weights in self.mllm.model.base_model.model
-        print("\n" + "="*80)
-        print("GRADIENT STATUS OF MLLM.MODEL WEIGHTS")
-        print("="*80)
-        
-        try:
-            base_model = self.mllm.model
-            total_params = 0
-            trainable_params = 0
-            
-            for name, param in base_model.named_parameters():
-                total_params += param.numel()
-                if param.requires_grad:
-                    trainable_params += param.numel()
-                    grad_status = "✓ TRAINABLE"
-                else:
-                    grad_status = "✗ FROZEN"
-                
-                print(f"{name:<60} | {grad_status} | Shape: {tuple(param.shape)} | Params: {param.numel():,}")
-            
-            print("-" * 80)
-            print(f"SUMMARY:")
-            print(f"  Total parameters: {total_params:,}")
-            print(f"  Trainable parameters: {trainable_params:,}")
-            print(f"  Frozen parameters: {total_params - trainable_params:,}")
-            print(f"  Trainable ratio: {trainable_params/total_params*100:.2f}%")
-            print("=" * 80)
-            
-        except Exception as e:
-            print(f"Failed to access self.mllm.model: {e}")
-            print("Available attributes in self.mllm.model:")
-            print([attr for attr in dir(self.mllm.model) if not attr.startswith('_')])
 
 
     def _add_special_tokens(self, tokenizer, special_tokens):

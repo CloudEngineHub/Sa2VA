@@ -33,7 +33,7 @@ def parse_args():
     
     parser.add_argument('--local_rank', '--local-rank', type=int, default=0)
     parser.add_argument('--deepspeed', type=str, default=None) # dummy
-    parser.add_argument('--data_root', default='/mnt/bn/zilongdata-us/xiangtai/Sa2VA/data', help='Root directory for all datasets.')
+    parser.add_argument('--data_root', default=None, help='Root directory for all datasets.')
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)

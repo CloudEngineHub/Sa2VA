@@ -134,7 +134,7 @@ def main():
     model.eval()
     model.preparing_for_generation(metainfo={})
 
-    image_folder = "/mnt/bn/zhnagtao-lq/xiangtai-mnt/internvl_yk/vlm_before_20241125/data/masa_sam_500k/"
+    image_folder = None
 
     dataset = STBench(
         image_folder=image_folder,

@@ -49,6 +49,7 @@ We provide the following models:
 |  Sa2VA-InternVL3-14B	 | [InternVL3-14B](https://huggingface.co/OpenGVLab/InternVL3-14B) |  [Qwen2.5-14B](https://huggingface.co/Qwen/Qwen2.5-14B)   | [🤗 link](https://huggingface.co/ByteDance/Sa2VA-InternVL3-14B) |
 |  Sa2VA-Qwen2_5-VL-3B	 | [Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct) |  [Qwen2.5-3B](https://huggingface.co/Qwen/Qwen2.5-3B)   | [🤗 link](https://huggingface.co/ByteDance/Sa2VA-Qwen2_5-VL-3B) |
 |  Sa2VA-Qwen2_5-VL-7B	 | [Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) |  [Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B)   | [🤗 link](https://huggingface.co/ByteDance/Sa2VA-Qwen2_5-VL-7B) |
+|  Sa2VA-Qwen3-VL-2B	 | [Qwen3-VL-2B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct) |  [Qwen3-1.7B](https://huggingface.co/Qwen/Qwen3-1.7B)   | [🤗 link](https://huggingface.co/ByteDance/Sa2VA-Qwen3-VL-2B) |
 |  Sa2VA-Qwen3-VL-4B	 | [Qwen3-VL-4B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct) |  [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B)   | [🤗 link](https://huggingface.co/ByteDance/Sa2VA-Qwen3-VL-4B) |
 
 ## 🤗 Gradio Demos

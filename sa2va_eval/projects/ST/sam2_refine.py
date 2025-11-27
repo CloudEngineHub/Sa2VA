@@ -8,8 +8,8 @@ import argparse
 from pycocotools import mask as _mask
 import tqdm
 
-sam_prefix = '/mnt/bn/xiangtai-training-data-video/dataset/segmentation_datasets/sam_v_full/sav_000/sav_train/sav_000/'
-coco_prefix = '/mnt/bn/zhnagtao-lq/xiangtai-mnt/tt_vlm/data/glamm_data/images/coco2014/train2014/'
+sam_prefix = None
+coco_prefix = None
 sam_p2 = 'data/sa_eval/'
 
 checkpoint = "./checkpoints/sam2_hiera_large.pt"

@@ -16,10 +16,10 @@ from PIL import Image
 
 import cv2
 
-sam_prefix = '/mnt/bn/zhnagtao-lq/xiangtai-mnt/sam/sa_000001/'
+sam_prefix = None
 coco_prefix = 'data/glamm_data/images/coco2014/train2014/'
 sam_p2 = 'data/sa_eval/'
-coco_test_prefix = "/mnt/bn/zhnagtao-lq/xiangtai-mnt/tt_vlm/data/coco/Images/val2017/"
+coco_test_prefix = None
 
 demo_items = [
     # {'image_path': './work_dirs/demo_figs/french-bulldog-8163486_1280.jpg', 'question': '<image>\nPlease detailed describe the image.'},

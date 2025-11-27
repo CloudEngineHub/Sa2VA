@@ -198,7 +198,7 @@ class Qwen2mmMROPEModel(BaseModel):
     INSTALL_REQ = False
     INTERLEAVE = False
 
-    def __init__(self, model_path='/mnt/bn/zilongdata-us/weixian/ckpt/qwen2mm-7B-mrope', tokenizer_path="/mnt/bn/zilongdata-us/weixian/ckpt/Qwen2.5MM-7B-ext-psz16", fix_res_size=None, **kwargs):
+    def __init__(self, model_path=None, tokenizer_path=None, fix_res_size=None, **kwargs):
 
         model, tokenizer = get_transformer_and_tokenizer(
             model_path, tokenizer_path

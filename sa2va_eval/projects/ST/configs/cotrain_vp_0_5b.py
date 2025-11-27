@@ -438,7 +438,7 @@ coco_vp_category_dataset = dict(
 # sam vp dataset
 sam_vp_dataset = dict(
     type=SamVisualPromptDataset,
-    image_folder="/mnt/bn/zhnagtao-lq/xiangtai-mnt/internvl_yk/vlm_before_20241125/data/masa_sam_500k/",
+    image_folder=None,
     json_file="./object_caption_data_train_split.json",
     tokenizer=tokenizer,
     special_tokens=special_tokens,

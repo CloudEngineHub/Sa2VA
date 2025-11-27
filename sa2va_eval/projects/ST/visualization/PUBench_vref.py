@@ -72,7 +72,7 @@ class STBench(torch.utils.data.Dataset):
         }
 
 def main():
-    image_folder = "/mnt/bn/zhnagtao-lq/xiangtai-mnt/internvl_yk/vlm_before_20241125/data/masa_sam_500k/"
+    image_folder = None
     save_path = "./stbench_vres/"
     if not os.path.exists(save_path):
         os.mkdir(save_path)

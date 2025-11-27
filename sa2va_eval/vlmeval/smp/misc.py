@@ -73,9 +73,9 @@ def bincount(lst):
 
 def get_cache_path(repo_id, branch=None):
     if "MMBench-Video" in repo_id:
-        return "/mnt/bn/xiangtai-training-data-video/dataset/video_vlm/video_benchmarks/MMBench-Video/"
+        return "dataset/video_vlm/video_benchmarks/MMBench-Video/"
     elif "Video-MME" in repo_id:
-        return "/mnt/bn/xiangtai-training-data-video/dataset/video_vlm/video_benchmarks/Video-MME/"
+        return "dataset/video_vlm/video_benchmarks/Video-MME/"
     hf_cache_info = scan_cache_dir()
     repos = list(hf_cache_info.repos)
     repo = None
