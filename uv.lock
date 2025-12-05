@@ -545,15 +545,17 @@ wheels = [
 ]
 
 [[package]]
-name = "decord"
-version = "0.6.0"
+name = "decord2"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/11/79/936af42edf90a7bd4e41a6cac89c913d4b47fa48a26b042d5129a9242ee3/decord-0.6.0-py3-none-manylinux2010_x86_64.whl", hash = "sha256:51997f20be8958e23b7c4061ba45d0efcd86bffd5fe81c695d0befee0d442976", size = 13602299, upload-time = "2021-06-14T21:30:55.486Z" },
-    { url = "https://files.pythonhosted.org/packages/6c/be/e15b5b866da452e62635a7b27513f31cb581fa2ea9cc9b768b535d62a955/decord-0.6.0-py3-none-win_amd64.whl", hash = "sha256:02665d7c4f1193a330205a791bc128f7e108eb6ae5b67144437a02f700943bad", size = 24733380, upload-time = "2021-06-14T21:30:57.766Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/99/697a7ff078a7570773a7f8221f4dd2bc3cde09f2839e448e92620b8c1c10/decord2-1.0.0-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:8e300727761a6d34c09dd6144cb5d5a04ac7ce22b8fbcb270e5bd8dc99e1ddab", size = 18596586, upload-time = "2025-06-14T19:48:00.956Z" },
+    { url = "https://files.pythonhosted.org/packages/de/c8/00ce380622c4df8e4d321f96e8228252dd6cd6d22731ecbb05c58e78df70/decord2-1.0.0-cp311-cp311-macosx_12_0_x86_64.whl", hash = "sha256:48a24a8a37f0d49d589a2d4729917f9f97715e2363d0c17eeba5636cc6f19424", size = 22307891, upload-time = "2025-06-14T19:48:03.212Z" },
+    { url = "https://files.pythonhosted.org/packages/da/3d/de6cc6a53f1a3270da49035598aa479ac5d32b17d7ccf654cf838d41f6dd/decord2-1.0.0-cp311-cp311-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b8088dd562297d8298aeb0b6b32fac4191799142e9c935ad087e9b77f7a058d2", size = 23407673, upload-time = "2025-06-14T19:48:05.952Z" },
+    { url = "https://files.pythonhosted.org/packages/64/e4/cd1fed10a2a9911616b2c6c142dcc9ee73c6e242a2fa3a1ffae8d6d66950/decord2-1.0.0-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:511b1e67cff4b695cc4073facaa5e5b5e3f60c1e693e00b2643aa8497f5c2a3f", size = 25055036, upload-time = "2025-06-14T19:48:08.653Z" },
 ]
 
 [[package]]
@@ -782,13 +784,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/be/a4/7319a2a8add4cc352be9e3efeff5e2aacee917c85ca2fa1647e29089983c/google_auth-2.41.1-py2.py3-none-any.whl", hash = "sha256:754843be95575b9a19c604a848a41be03f7f2afd8c019f716dc1f51ee41c639d", size = 221302, upload-time = "2025-09-30T22:51:24.212Z" },
 ]
 
+[package.optional-dependencies]
+requests = [
+    { name = "requests" },
+]
+
 [[package]]
 name = "google-genai"
-version = "1.45.0"
+version = "1.53.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
-    { name = "google-auth" },
+    { name = "google-auth", extra = ["requests"] },
     { name = "httpx" },
     { name = "pydantic" },
     { name = "requests" },
@@ -796,9 +803,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/91/77/776b92f6f7cf7d7d3bc77b44a323605ae0f94f807cf9a4977c90d296b6b4/google_genai-1.45.0.tar.gz", hash = "sha256:96ec32ae99a30b5a1b54cb874b577ec6e41b5d5b808bf0f10ed4620e867f9386", size = 238198, upload-time = "2025-10-15T23:03:07.713Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/de/b3/36fbfde2e21e6d3bc67780b61da33632f495ab1be08076cf0a16af74098f/google_genai-1.53.0.tar.gz", hash = "sha256:938a26d22f3fd32c6eeeb4276ef204ef82884e63af9842ce3eac05ceb39cbd8d", size = 260102, upload-time = "2025-12-03T17:21:23.233Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/11/8f/922116dabe3d0312f08903d324db6ac9d406832cf57707550bc61151d91b/google_genai-1.45.0-py3-none-any.whl", hash = "sha256:e755295063e5fd5a4c44acff782a569e37fa8f76a6c75d0ede3375c70d916b7f", size = 238495, upload-time = "2025-10-15T23:03:05.926Z" },
+    { url = "https://files.pythonhosted.org/packages/40/f2/97fefdd1ad1f3428321bac819ae7a83ccc59f6439616054736b7819fa56c/google_genai-1.53.0-py3-none-any.whl", hash = "sha256:65a3f99e5c03c372d872cda7419f5940e723374bb12a2f3ffd5e3e56e8eb2094", size = 262015, upload-time = "2025-12-03T17:21:21.934Z" },
 ]
 
 [[package]]
@@ -1819,7 +1826,7 @@ name = "nvidia-cudnn-cu12"
 version = "9.1.0.70"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9f/fd/713452cd72343f682b1c7b9321e23829f00b842ceaedcda96e742ea0b0b3/nvidia_cudnn_cu12-9.1.0.70-py3-none-manylinux2014_x86_64.whl", hash = "sha256:165764f44ef8c61fcdfdfdbe769d687e06374059fbb388b6c89ecb0e28793a6f", size = 664752741, upload-time = "2024-04-22T15:24:15.253Z" },
@@ -1831,7 +1838,7 @@ name = "nvidia-cufft-cu12"
 version = "11.2.1.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7a/8a/0e728f749baca3fbeffad762738276e5df60851958be7783af121a7221e7/nvidia_cufft_cu12-11.2.1.3-py3-none-manylinux2014_aarch64.whl", hash = "sha256:5dad8008fc7f92f5ddfa2101430917ce2ffacd86824914c82e28990ad7f00399", size = 211422548, upload-time = "2024-06-18T19:33:39.396Z" },
@@ -1854,9 +1861,9 @@ name = "nvidia-cusolver-cu12"
 version = "11.6.1.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
-    { name = "nvidia-cusparse-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-cusparse-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/6b/a5c33cf16af09166845345275c34ad2190944bcc6026797a39f8e0a282e0/nvidia_cusolver_cu12-11.6.1.9-py3-none-manylinux2014_aarch64.whl", hash = "sha256:d338f155f174f90724bbde3758b7ac375a70ce8e706d70b018dd3375545fc84e", size = 127634111, upload-time = "2024-06-18T19:35:01.793Z" },
@@ -1869,7 +1876,7 @@ name = "nvidia-cusparse-cu12"
 version = "12.3.1.170"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform != 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/a9/c0d2f83a53d40a4a41be14cea6a0bf9e668ffcf8b004bd65633f433050c0/nvidia_cusparse_cu12-12.3.1.170-py3-none-manylinux2014_aarch64.whl", hash = "sha256:9d32f62896231ebe0480efd8a7f702e143c98cfaa0e8a76df3386c1ba2b54df3", size = 207381987, upload-time = "2024-06-18T19:35:32.989Z" },
@@ -2098,7 +2105,7 @@ dependencies = [
     { name = "torch", version = "2.9.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-5-sa2va-latest') or (sys_platform == 'darwin' and extra != 'extra-5-sa2va-legacy') or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "torch", version = "2.9.0+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-5-sa2va-latest') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra != 'extra-5-sa2va-legacy') or (sys_platform == 'darwin' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy') or (sys_platform == 'linux' and extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "tqdm", marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
-    { name = "transformers", version = "4.57.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
+    { name = "transformers", version = "4.57.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/70/b8/2e79377efaa1e5f0d70a497db7914ffd355846e760ffa2f7883ab0f600fb/peft-0.17.1.tar.gz", hash = "sha256:e6002b42517976c290b3b8bbb9829a33dd5d470676b2dec7cb4df8501b77eb9f", size = 568192, upload-time = "2025-08-21T09:25:22.703Z" }
 wheels = [
@@ -2719,7 +2726,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "datetime" },
-    { name = "decord" },
+    { name = "decord2" },
     { name = "flash-attn" },
     { name = "google-genai" },
     { name = "hydra-core" },
@@ -2746,7 +2753,7 @@ dependencies = [
 [package.optional-dependencies]
 latest = [
     { name = "peft", version = "0.17.1", source = { registry = "https://pypi.org/simple" } },
-    { name = "transformers", version = "4.57.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "transformers", version = "4.57.1", source = { registry = "https://pypi.org/simple" } },
 ]
 legacy = [
     { name = "peft", version = "0.11.1", source = { registry = "https://pypi.org/simple" } },
@@ -2756,9 +2763,9 @@ legacy = [
 [package.metadata]
 requires-dist = [
     { name = "datetime" },
-    { name = "decord", specifier = "==0.6.0" },
+    { name = "decord2", specifier = "==1.0.0" },
     { name = "flash-attn", specifier = "==2.7.3" },
-    { name = "google-genai", specifier = ">=1.25.0" },
+    { name = "google-genai", specifier = ">=1.49.0" },
     { name = "hydra-core", specifier = ">=1.3.2" },
     { name = "moviepy", specifier = "==1.0.3" },
     { name = "octorun", specifier = ">=0.1.2" },
@@ -2776,7 +2783,7 @@ requires-dist = [
     { name = "timm", specifier = "==1.0.17" },
     { name = "torch", marker = "sys_platform != 'linux'", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cpu" },
     { name = "torch", marker = "sys_platform == 'linux'", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu124" },
-    { name = "transformers", marker = "extra == 'latest'", specifier = "==4.57.0" },
+    { name = "transformers", marker = "extra == 'latest'", specifier = "==4.57.1" },
     { name = "transformers", marker = "extra == 'legacy'", specifier = "==4.49.0" },
     { name = "validators" },
     { name = "xlsxwriter" },
@@ -3413,7 +3420,7 @@ wheels = [
 
 [[package]]
 name = "transformers"
-version = "4.57.0"
+version = "4.57.1"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "sys_platform != 'darwin' and sys_platform != 'linux'",
@@ -3433,9 +3440,9 @@ dependencies = [
     { name = "tokenizers", version = "0.22.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
     { name = "tqdm", marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f3/5c/a22c39dac2687f3fe2a6b97e2c1ae516e91cd4d3976a7a2b7c24ff2fae48/transformers-4.57.0.tar.gz", hash = "sha256:d045753f3d93f9216e693cdb168698dfd2e9d3aad1bb72579a5d60ebf1545a8b", size = 10142956, upload-time = "2025-10-03T17:03:47.177Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d6/68/a39307bcc4116a30b2106f2e689130a48de8bd8a1e635b5e1030e46fcd9e/transformers-4.57.1.tar.gz", hash = "sha256:f06c837959196c75039809636cd964b959f6604b75b8eeec6fdfc0440b89cc55", size = 10142511, upload-time = "2025-10-14T15:39:26.18Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e5/2b/4d2708ac1ff5cd708b6548f4c5812d0ae40d1c28591c4c1c762b6dbdef2d/transformers-4.57.0-py3-none-any.whl", hash = "sha256:9d7c6d098c026e40d897e017ed1f481ab803cbac041021dbc6ae6100e4949b55", size = 11990588, upload-time = "2025-10-03T17:03:43.629Z" },
+    { url = "https://files.pythonhosted.org/packages/71/d3/c16c3b3cf7655a67db1144da94b021c200ac1303f82428f2beef6c2e72bb/transformers-4.57.1-py3-none-any.whl", hash = "sha256:b10d05da8fa67dc41644dbbf9bc45a44cb86ae33da6f9295f5fbf5b7890bd267", size = 11990925, upload-time = "2025-10-14T15:39:23.085Z" },
 ]
 
 [[package]]
@@ -3444,7 +3451,7 @@ version = "0.0.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "transformers", version = "4.49.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-legacy'" },
-    { name = "transformers", version = "4.57.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
+    { name = "transformers", version = "4.57.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/c2/65f13aec253100e1916e9bd7965fe17bde796ebabeb1265f45191ab4ddc0/transformers-stream-generator-0.0.5.tar.gz", hash = "sha256:271deace0abf9c0f83b36db472c8ba61fdc7b04d1bf89d845644acac2795ed57", size = 13033, upload-time = "2024-03-11T14:18:02.079Z" }
 
@@ -3640,7 +3647,7 @@ dependencies = [
     { name = "torchvision", version = "0.21.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "torchvision", version = "0.24.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "transformers", version = "4.49.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-legacy'" },
-    { name = "transformers", version = "4.57.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
+    { name = "transformers", version = "4.57.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
     { name = "transformers-stream-generator" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a0/56/5766fd0f630fbf3c8dc059321888028bf77927878f0c558ab946cab9487f/xtuner-0.1.23.tar.gz", hash = "sha256:76399dd3cf476bc8d56bdc973cda80c7f5e236db5c67bf928c619c52b23ff5c8", size = 377693, upload-time = "2024-07-22T12:19:46.302Z" }
@@ -3670,7 +3677,7 @@ deepspeed = [
     { name = "torchvision", version = "0.21.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "torchvision", version = "0.24.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'linux' or (extra == 'extra-5-sa2va-latest' and extra == 'extra-5-sa2va-legacy')" },
     { name = "transformers", version = "4.49.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-legacy'" },
-    { name = "transformers", version = "4.57.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
+    { name = "transformers", version = "4.57.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-5-sa2va-latest' or extra != 'extra-5-sa2va-legacy'" },
     { name = "transformers-stream-generator" },
 ]
 

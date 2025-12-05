@@ -134,7 +134,7 @@ sa2va_vrt_configs = [
         type=Sa2VAVRTTrain,
         name='VER_SA1B_Thinking',
         thinking_mode=True,
-        tfrecord_pattern='data/ver_0801/ver_training_*.tfrecord',
+        tfrecord_pattern='data/VRT-Training/ver_training_*.tfrecord',
         **sa2va_default_dataset_configs,
     ),
 ]

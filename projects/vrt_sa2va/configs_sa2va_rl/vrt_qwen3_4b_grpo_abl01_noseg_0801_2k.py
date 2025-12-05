@@ -136,7 +136,7 @@ sa2va_vrt_configs = [
         type=Sa2VAVRTTrain,
         name='VER_SA1B_Filtered',
         thinking_mode=True,
-        tfrecord_pattern='data/ver_0801/ver_training_*.tfrecord',
+        tfrecord_pattern='data/VRT-Training/ver_training_*.tfrecord',
         with_language_labels=False,
         keys_json_file='work_dirs/group_inference_sa2va_4b_0801_grpo_ver_1k_0801_80k_output/top_2k_high_variance_samples.json',
         **sa2va_default_dataset_configs,
