@@ -4,7 +4,6 @@ Evaluates LLM performance on VER benchmark by comparing predicted masks with hum
 """
 
 import argparse
-import glob
 import json
 import os
 import torch
@@ -13,10 +12,13 @@ import tqdm
 from pycocotools import mask as _mask
 import numpy as np
 from scipy.optimize import linear_sum_assignment
-from typing import Dict, List
+from typing import Dict, List, Optional
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
 from projects.vrt_sa2va.utils.strings import find_seg_indices
-from projects.vrt_sa2va.evaluation.vrt_eval_dataloader import VRTEvalDataset
+from projects.vrt_sa2va.evaluation.packed_vrt_eval_dataloader import PackedVRTEvalDataset
 
 
 def mask_to_rle(mask):
@@ -102,7 +104,7 @@ def prepare_question_prompt(question: str, use_thinking: bool = True) -> str:
 class VERLLMEvaluator:
     """Evaluator for VER benchmark using LLM"""
     
-    def __init__(self, model_path: str, dataset: VRTEvalDataset = None, use_thinking: bool = True, device: int = 0):
+    def __init__(self, model_path: str, dataset: Optional[PackedVRTEvalDataset] = None, use_thinking: bool = True, device: int = 0):
         """
         Initialize the evaluator
         
@@ -495,13 +497,8 @@ def parse_args():
         help='Path to the LLM model')
     parser.add_argument(
         '--tfrecord_path',
-        default='data/VER_BENCH/VER-Labeling/data/0801_data_label/sa2va_samples_*.tfrecord',
+        default='data/VRT-Eval/*.tfrecord',
         help='Path to the directory containing TFRecord files'
-    )
-    parser.add_argument(
-        '--human_label_path',
-        default='data/VER_BENCH/VER-Labeling/data/0801_data_label_result/sa2va_samples_*.txt',
-        help='Path to the directory containing human-labeled results files'
     )
     parser.add_argument(
         '--output_dir',
@@ -539,13 +536,7 @@ def worker_entry(rank, args, output_dir, use_thinking):
 
     print(f"Worker {rank} starting on cuda:{rank}.... Loading the dataset first.")
 
-    # Initialize dataset within the worker
-    tfrecord_paths = glob.glob(args.tfrecord_path)
-    human_label_paths = glob.glob(args.human_label_path)
-    dataset = VRTEvalDataset(
-        tfrecord_paths, human_label_paths, 
-        cls_mapping='data/VER_BENCH/VER-Labeling/data/ver_labeling_1106.json'
-    )
+    dataset = PackedVRTEvalDataset(args.tfrecord_path)
     # each worker will take a strided subset of samples
     evaluation_samples = dataset.get_evaluation_samples()
     tot_samples = len(evaluation_samples)

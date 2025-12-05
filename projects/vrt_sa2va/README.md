@@ -1,17 +1,40 @@
 # Visual Reasoning Tracer (VRT)
 
-[\[🏠 Project Page\]](https://harboryuan.github.io/visual-reasoning-tracer/) [\[📄 Paper\]](https://arxiv.org/pdf/2512.05091) [\[🤗 VRT-80k\]](https://huggingface.co/datasets/HarborYuan/VisualReasoningTracer)
+[\[🏠 Project Page\]](https://harboryuan.github.io/visual-reasoning-tracer/) [\[📄 Paper\]](https://arxiv.org/pdf/2512.05091) [\[🤗 VRT-80k\]](https://huggingface.co/datasets/HarborYuan/VisualReasoningTracer) [\[🤗 VRT-Bench\]](https://huggingface.co/datasets/HarborYuan/VRT-Eval)
 
 ## Overview
 
 Current Multimodal Large Language Models (MLLMs) often lack transparency in their reasoning processes. To bridge this gap, we introduce **Visual Reasoning Tracer (VRT)**, a task requiring models to explicitly predict intermediate objects in a reasoning path. We present **VRT-Bench** for evaluation, a new metric for reasoning quality, and **VRT-80k**, a large-scale training dataset. Models trained on VRT-80k demonstrate significant improvements in grounded reasoning.
 
+The VRT project is built upon the Sa2VA framework and fully supports the Sa2VA training and evaluation pipeline. For more information about Sa2VA, please refer to the [Sa2VA README](../../README.md).
+
+## Demos
+
+### VRT-Bench Examples
+
+<div align="center">
+  <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/fig_bench1.jpg" width="100%"/>
+  <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/fig_bench2.jpg" width="100%"/>
+  <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/fig_bench3.jpg" width="100%"/>
+  <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/fig_bench4.jpg" width="100%"/>
+</div>
+
+### Comparison
+
+| GT | R-Sa2VA (Ours) |
+| :---: | :---: |
+| <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/comp1_gt.jpg" width="100%"/> | <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/comp1_rs2va.jpg" width="100%"/> |
+
+| Gemini 2.5 Pro | Qwen3VL |
+| :---: | :---: |
+| <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/comp1_gemini.jpg" width="100%"/> | <img src="https://harboryuan.github.io/visual-reasoning-tracer/static/images/comp1_qwen3.jpg" width="100%"/> |
+
 ## Model Training
 
-To train the model, use the following command:
+To train the model, use the following command: (same as training other Sa2VA models)
 
 ```bash
-bash tools/dist.sh projects/vrt_sa2va/configs_sa2va/vrt_sa2va_4b_qwen3_sft.py 8
+bash tools/dist.sh train projects/vrt_sa2va/configs_sa2va/vrt_sa2va_4b_qwen3_sft.py 8
 ```
 
 ## Models
@@ -29,6 +52,19 @@ Download the VRT-80k dataset to `data/VRT-Training`:
 
 ```bash
 uv run huggingface-cli download HarborYuan/VisualReasoningTracer --repo-type dataset --local-dir data/VRT-Training
+```
+
+Download the VRT-Bench dataset to `data/VRT-Eval`:
+
+```bash
+uv run huggingface-cli download HarborYuan/VRT-Eval --repo-type dataset --local-dir data/VRT-Eval
+```
+
+## Evaluation
+To evaluate the model on VRT-Bench, use the following command:
+
+```bash
+uv run projects/vrt_sa2va/evaluation/vrt_eval_single.py HarborYuan/R-Sa2VA-Qwen3VL-4B-RL --gpus 8
 ```
 
 ## Evaluation Results
