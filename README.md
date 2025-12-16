@@ -60,6 +60,15 @@ We provide a script that implements interactive chat using gradio, which require
 PYTHONPATH=. python projects/sa2va/gradio/app.py ByteDance/Sa2VA-4B
 ```
 
+
+
+## Environment
+
+Use `uv` to manage dependencies. Run `uv sync` to install everything, choosing the extra based on your model family:
+- `uv sync --extra=legacy` for InternVL2.5 or earlier models (legacy Transformers).
+- `uv sync --extra=latest` for newer models (latest Transformers).
+
+
 ## 🚀 Quick Start
 
 Our Sa2VA model is available on 🤗HuggingFace. With very few steps, you can try it with your own data. You can install the `demo/requirements.txt` to avoid training-only packages.
@@ -152,7 +161,9 @@ source .venv/bin/activate
 **Option 2: Using `conda` and `pip`**
 
 Deprecated.
+</details>
 
+<details open>
 <summary>Pretrained Model Preparation</summary>
 
 You are expected to download the following pretrained models and place them in the `./pretrained` directory:
@@ -209,7 +220,7 @@ data/
 
 ```
 **Important**: `sam_v_full` is the SA-V dataset, which is not included in the download link. You can download it from **Meta** ([here](https://ai.meta.com/datasets/segment-anything-video/)). Please follow their license.
-
+</details>
 
 <details open>
 <summary>Training Script</summary>
