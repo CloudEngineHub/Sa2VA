@@ -5,30 +5,15 @@
 <h2 align="center">SAMTok: Representing Any Mask with Two Words</h2>
 
 <p align="center">
-  <a href="https://github.com/bytedance/Sa2VA/tree/main" target="_blank"><img src="https://img.shields.io/badge/arXiv-2509.18094-red"></a>
-  <a href="https://github.com/bytedance/Sa2VA/tree/main" target="_blank"><img src="https://img.shields.io/badge/Project-Page-brightgreen"></a>
+  <a href="https://arxiv.org/abs/2601.16093" target="_blank"><img src="https://img.shields.io/badge/arXiv-2601.16093-red"></a>
+  <a href="https://zhouyiks.github.io/projects/SAMTok/" target="_blank"><img src="https://img.shields.io/badge/Project-Page-brightgreen"></a>
   <a href="https://huggingface.co/collections/zhouyik/samtok" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collection-orange"></a>
-  <a href="https://huggingface.co/collections/zhouyik/samtok" target="_blank"><img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm-dark.svg"></a>
+  <a href="https://huggingface.co/spaces/insomnia7/SAMTok" target="_blank"><img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm-dark.svg"></a>
 </p>
 
 <p align="center">
-  <a href="https://scholar.google.com/citations?user=dZikW2YAAAAJ&hl=en&oi=ao">Yikang Zhou</a><sup>1,2</sup>, 
-  <a href="https://scholar.google.com/citations?hl=zh-CN&user=3xu4a5oAAAAJ">Tao Zhang</a><sup>1</sup>, 
-  <a href="https://scholar.google.com/citations?user=51nzC3EAAAAJ&hl=en">Dengxian Gong</a><sup>1</sup>, 
-  <a href="https://openreview.net/profile?id=~Yuanzheng_Wu1">Yuanzheng Wu</a><sup>1</sup>, 
-  <a href="https://haochen-wang409.github.io/"> Haochen Wang</a><sup>2</sup>,
-  <a href="https://tyfeld.github.io/">Ye Tian</a><sup>2</sup>, 
-  <a href="https://yuanhaobo.me/">Haobo Yuan</a><sup>1</sup>, 
-  <a href="https://scholar.google.com/citations?user=rzYgLkgAAAAJ&hl=zh-CN">Jiacong Wang</a><sup>2</sup>, 
-  <a href="https://luqi.info/">Lu Qi</a><sup>1</sup>, 
-  <a href="https://haofei.vip/">Hao Fei</a><sup>3</sup>,
-  <a href="https://scholar.google.com/citations?hl=zh-CN&user=FjoRmF4AAAAJ">Shunping Ji</a><sup>1,✉️</sup>,
-  <a href="https://scholar.google.com/citations?user=LpSrdBwAAAAJ&hl=en">Anran Wang</a><sup>2</sup>, 
-  <a href="https://openreview.net/profile?id=~Zhuochen_Wang1">Zhuochen Wang</a><sup>2</sup>, 
-  <a href="https://scholar.google.com/citations?user=YgL4rywAAAAJ&hl=en">Yujing Wang</a><sup>2</sup>, 
-  <a href="https://openreview.net/profile?id=~Cheng_CHEN53">Cheng Chen</a><sup>2</sup>, 
-  <a href="https://lxtgh.github.io/">Xiangtai Li</a><sup>2</sup>
-  <p align="center"><sup>1</sup>Wuhan University <sup>2</sup>ByteDance <sup>3</sup>NUS</p> 
+  <a href="https://scholar.google.com/citations?user=dZikW2YAAAAJ&hl=en&oi=ao">Yikang Zhou</a><sup>1,2</sup>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=3xu4a5oAAAAJ">Tao Zhang</a><sup>1</sup>, <a>Dengxian Gong</a><sup>1</sup>, <a>Yuanzheng Wu</a><sup>1</sup>, <a>Haochen Wang</a><sup>2</sup>, <a>Ye Tian</a><sup>2</sup>, <a>Haobo Yuan</a><sup>1</sup>, <a>Jiacong Wang</a><sup>2</sup>,  <a>Lu Qi</a><sup>1</sup>, <a>Hao Fei</a><sup>1</sup>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=FjoRmF4AAAAJ">Shunping Ji</a><sup>1,✉️</sup>, <a>Anran Wang</a><sup>2</sup>, <a>Zhuochen Wang</a><sup>2</sup>, <a>Yujing Wang</a><sup>2</sup>, <a>Cheng CHEN</a><sup>2</sup>, <a href="https://lxtgh.github.io/">Xiangtai Li</a><sup>2</sup>
+  <p align="center"><sup>1</sup>Wuhan University <sup>2</sup>ByteDance</p>
 </p>
 
 <p align="center"><img width="750" src="figs/teaser.png"></p>
@@ -42,7 +27,7 @@
 - ✅ Release SAMTok training instruction.
 - ✅ Release evaluation codes.
 - ✅ Release demo codes.
-- ⏳ Release gradio demo.
+- ✅ Release gradio demo.
 - ⏳ Release RL codes & instruction.
 
 
@@ -73,7 +58,7 @@ hf download zhouyik/Qwen3-VL-8B-SAMTok --local-dir zhouyik/Qwen3-VL-8B-SAMTok
 ```
 3. **Mask Generation.**
 Mask generation means the VLM outputs responses containing mask tokens, and SAMTok decodes these textual mask tokens into 2D arrays.
-[Please refer to this script.](projects/samtok/demo/qwen3vl_samtok_infer.py)
+[Please refer to this script.](demo/qwen3vl_samtok_infer.py)
 ```python
 import re
 import numpy as np
@@ -216,22 +201,27 @@ text_token_2d_mask_mapping = {tag: _pred_mask for tag, _pred_mask in zip(tags, _
 ```
 
 4. **Mask Understanding.**
-Mask understanding means encoding 2D masks into mask tokens using SAMTok and incorporating them into user instructions, requiring the VLM to understand the specific image regions referred to by the mask tokens and answer the user's questions. Region captioning is a typical task of mask understanding. [Please refer to this script.](projects/samtok/evaluation/qwen3vl/qwen3vl_dam_infer.py)
+Mask understanding means encoding 2D masks into mask tokens using SAMTok and incorporating them into user instructions, requiring the VLM to understand the specific image regions referred to by the mask tokens and answer the user's questions. Region captioning is a typical task of mask understanding. [Please refer to this script.](evaluation/qwen3vl/qwen3vl_dam_infer.py)
 
 ## 🕹️ Gradio Demo
 
 ## 🤖 Training
-Please refer to [TRAIN_TOKENIZER.md](projects/samtok/docs/TRAIN_TOKENIZER.md) for training tokenizer.
+Please refer to [TRAIN_TOKENIZER.md](docs/TRAIN_TOKENIZER.md) for training tokenizer.
 
-Please refer to [TRAIN_VLM.md](projects/samtok/docs/TRAIN_VLM.md) for training VLM.
+Please refer to [TRAIN_VLM.md](docs/TRAIN_VLM.md) for training VLM.
 
 ## 🔬 Evaluation
-[Please refer to this folder](projects/samtok/evaluation)
+[Please refer to this folder](evaluation)
 
 ## 📖 Citation
 
 Please kindly cite our paper if you find this project helpful.
 
 ```bibtex
-
+@article{samtok,
+  title={SAMTok: Representing Any Mask with Two Words},
+  author={Zhou, Yikang and Zhang, Tao and Gong, Dengxian and Wu, Yuanzheng and Tian, Ye and Wang, Haochen and Yuan, Haobo and Wang, Jiacong and Qi, Lu and Wang, Anran and Wang, Zhuochen and Wang, Yujing and Chen, Cheng and Ji, Shunping and Li, Xiangtai},
+  journal={arXiv preprint arXiv:2601.16093},
+  year={2026}
+}
 ```

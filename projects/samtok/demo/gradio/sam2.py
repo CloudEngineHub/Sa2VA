@@ -19,8 +19,6 @@ from transformers.modeling_attn_mask_utils import _prepare_4d_attention_mask
 from transformers.utils import can_return_tuple, ModelOutput
 from transformers.activations import ACT2FN
 
-from projects.samtok.models.losses import CrossEntropyLoss, DiceLoss, point_sample, get_uncertain_point_coords_with_randomness
-
 
 class SAM2Config(PretrainedConfig):
     model_type = "sam2"
@@ -688,8 +686,6 @@ class PromptEncoder(nn.Module):
             sparse_embeddings = torch.cat([sparse_embeddings, box_embeddings], dim=1)
 
         if masks is not None:
-            weight_dtype = next(self.mask_downscaling.parameters()).dtype
-            masks = masks.to(weight_dtype)
             dense_embeddings = self._embed_masks(masks)
         else:
             dense_embeddings = self.no_mask_embed.weight.reshape(1, -1, 1, 1).expand(
@@ -3919,7 +3915,7 @@ class VQEmebedding(nn.Embedding):
         embeds = self.embed(embed_idxs)
 
         if self.ema and self.training and not freeze_codebook:
-            # print("================>here: self._update_embedding()")
+            print("================>here: self._update_embedding()")
             # exit(0)
             self._update_embedding()
         # print("================>self.ema and self.training and not freeze_codebook: ", self.ema and self.training and not freeze_codebook)
@@ -4087,27 +4083,6 @@ class VQ_SAM2(PreTrainedModel):
             shared_codebook=config.shared_codebook,
             restart_unused_codes=True,
         )
-
-        self.loss_mask = CrossEntropyLoss(use_sigmoid=True, reduction='mean', loss_weight=2.0)
-        self.loss_dice = DiceLoss(use_sigmoid=True, activate=True, reduction='mean', naive_dice=True, eps=1.0, loss_weight=0.5)
-        
-    def sample_points(self, mask_pred, gt_masks):
-        gt_masks = gt_masks.unsqueeze(1)
-        gt_masks = gt_masks.to(mask_pred)
-        mask_pred = mask_pred.unsqueeze(1)
-        # (N, 1, h, w)
-
-        with torch.no_grad():
-            points_coords = get_uncertain_point_coords_with_randomness(
-                mask_pred.to(torch.float32), None, self.config.num_points,
-                self.config.oversample_ratio, self.config.importance_sample_ratio)
-            # shape (num_total_gts, h, w) -> (num_total_gts, num_points)
-            mask_point_targets = point_sample(
-                gt_masks.float(), points_coords).squeeze(1)
-        # shape (num_queries, h, w) -> (num_queries, num_points)
-        mask_point_preds = point_sample(
-            mask_pred.to(torch.float32), points_coords.to(torch.float32)).squeeze(1)
-        return mask_point_preds.to(mask_pred.dtype), mask_point_targets.to(mask_pred.dtype)
     
     def forward_with_codes(self, pixel_values, quant_codes):
         batch_size = len(quant_codes)
@@ -4176,33 +4151,7 @@ class VQ_SAM2(PreTrainedModel):
         pred_masks = self.model.inject_language_embd(sam2_states, quant_mask_embeds, nf_nobj=(batch_size, 1))
 
         if self.training and gt_masks is not None:
-            gt_masks = [F.interpolate(gt_mask.unsqueeze(0).to(pred_masks.dtype), size=pred_masks[0].shape[-2:], mode='nearest').squeeze(0) for gt_mask in gt_masks]
-            gt_masks = torch.cat(gt_masks, dim=0)
-            pred_masks = pred_masks.flatten(0, 1)
-
-            if self.config.loss_sample_points:
-                sampled_pred_mask, sampled_gt_mask = self.sample_points(pred_masks, gt_masks)
-                loss_dice = self.loss_dice(
-                    sampled_pred_mask,
-                    sampled_gt_mask, avg_factor=(len(gt_masks) + 1e-4))
-                loss_mask = self.loss_mask(
-                    sampled_pred_mask.reshape(-1),
-                    sampled_gt_mask.reshape(-1),
-                    avg_factor=(pred_masks.shape[0] * sampled_pred_mask.shape[1] + 1e-4))
-            else:
-                loss_mask = self.loss_mask(pred_masks, gt_masks)
-                loss_dice = self.loss_dice(pred_masks, gt_masks)
-            loss += loss_mask + loss_dice
-            
-            return VQ_SAM2ModelOutput(
-                loss=loss,
-                loss_recon=loss_mask+loss_dice,
-                loss_quant=quant_loss*self.config.vq_loss_weight,
-                pred_masks=pred_masks,
-                continues_mask_embeds=mask_embeds,
-                quant_mask_embeds=quant_mask_embeds,
-                quant_codes=code,
-            )
+            return None
         else:
             return VQ_SAM2ModelOutput(
                 pred_masks=pred_masks,

@@ -59,8 +59,8 @@ class VQ_SAM2Model(BaseModel):
         
         self.hf_model = BUILDER.build(hf_model)
 
-        if sam2_pretrained_weights is not None:
-            self.hf_model.model.load_pretrained_weights(sam2_pretrained_weights, strict=False)
+        # if sam2_pretrained_weights is not None:
+        #     self.hf_model.model.load_pretrained_weights(sam2_pretrained_weights, strict=False)
         
         if pretrained_pth is not None:
             pretrained_state_dict = guess_load_checkpoint(pretrained_pth)
@@ -77,6 +77,16 @@ class VQ_SAM2Model(BaseModel):
 
         self.box_input = box_input
         self.freeze_codebook = freeze_codebook
+    
+    def state_dict(self, *args, **kwargs):
+        from collections import OrderedDict
+
+        to_return = OrderedDict()
+
+        for n, p in self.hf_model.state_dict().items():
+            to_return.update({n: p})
+
+        return to_return
 
     def init_weights(self):
         pass
